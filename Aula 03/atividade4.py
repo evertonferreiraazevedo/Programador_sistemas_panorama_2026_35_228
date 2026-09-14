@@ -1,0 +1,6 @@
+numero1 = int(input("Digite o primeiro número: "))
+numero2 = int(input("Digite o segundo número: "))
+numero3 = float(input("Digite o terceiro número: "))
+print("Letra a - ", numero1*2 * numero2/2)
+print("Letra b - ", numero1*3 + numero3)
+print("Letra c - ", numero3**3)
