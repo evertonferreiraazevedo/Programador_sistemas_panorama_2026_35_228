@@ -1,0 +1,1 @@
+{'papagaio': '60', 'vaca': '5', 'boi': '13', 'burro': '25'}

@@ -2,37 +2,35 @@ import os
 
 def criar_arquivo():
     # Verifica se o arquivo já existe para não apagar o conteúdo anterior
-    if os.path.exists("meu_arquivo.txt"):
-        print("\nAviso - O arquivo já existe!")
-    else:
-        arquivo = open("meu_arquivo.txt", "w", encoding="utf-8")
-        arquivo.close()
-        print("\nSucesso - Arquivo criado com o conteúdo inicial!")
-        
+    try:
+        if os.path.exists("meu_arquivo.txt"):
+            print("\nAviso - O arquivo já existe!")
+        else:
+            arquivo = open("meu_arquivo.txt", "w", encoding="utf-8")
+            arquivo.close()
+            print("\nSucesso - Arquivo criado com o conteúdo inicial!")
+    except Exception as e:
+        print(f"\nErro ao criar o arquivo: {e}")
+
 def ler_arquivo():
-    arquivo = open("meu_arquivo.txt", "r", encoding="utf-8")
-    conteudo = arquivo.read()
-    print(conteudo)
-    arquivo.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
+    try:
+        arquivo = open("meu_arquivo.txt", "r", encoding="utf-8")
+        conteudo = arquivo.read()
+        print(conteudo)
+        arquivo.close()
+    except Exception as e:
+        print(f"\nErro ao ler o arquivo: {e}")
+        
 def adicionar_animal():
     animal = input("\nDigite o nome de um animal para adicionar: ")
-    arquivo = open("meu_arquivo.txt", "a", encoding="utf-8")
-    arquivo.write(animal + "\n")
-    arquivo.close()
+    try:
+        arquivo = open("meu_arquivo.txt", "a", encoding="utf-8")
+        arquivo.write(animal + "\n")
+    except Exception as e:
+        print(f"\nErro ao adicionar animal: {e}")
+        return
     print(f"[Sucesso] '{animal}' foi adicionado ao arquivo!")
+    
 opcao = ""
 while opcao != "0":
     print("\n======= MENU DO ARQUIVO =======")

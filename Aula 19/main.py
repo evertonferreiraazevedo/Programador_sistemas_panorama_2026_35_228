@@ -1,5 +1,5 @@
-# #Abrir um arquivo de texto e ler seu conteúdo
-# arquivo = open("exemplo.txt", "r", encoding="utf-8")
+#Abrir um arquivo de texto e ler seu conteúdo
+# arquivo = open("zezinho.txt", "r", encoding="utf-8")
 # conteudo = arquivo.read()
 # print(conteudo)
 # arquivo.close()
