@@ -1,0 +1,76 @@
+{
+    "total_registros": 8,
+    "total_validos": 3,
+    "aprovados": 2,
+    "reprovados": 1,
+    "media_geral": 7.67,
+    "registros": [
+        {
+            "id": 1,
+            "nome": "Ana",
+            "media": 9.0,
+            "resultado": "Aprovado",
+            "problemas": []
+        },
+        {
+            "id": 2,
+            "nome": "Bruno",
+            "media": 5.0,
+            "resultado": "Reprovado",
+            "problemas": []
+        },
+        {
+            "id": 3,
+            "nome": "Carla",
+            "media": 9.0,
+            "resultado": "Aprovado",
+            "problemas": []
+        },
+        {
+            "id": 2,
+            "nome": "Eva",
+            "media": null,
+            "resultado": "Não avaliado",
+            "problemas": [
+                "ID duplicado: 2."
+            ]
+        },
+        {
+            "id": 4,
+            "nome": "Diego",
+            "media": null,
+            "resultado": "Não avaliado",
+            "problemas": [
+                "Aluno não possui notas cadastradas."
+            ]
+        },
+        {
+            "id": 5,
+            "nome": "Felipe",
+            "media": null,
+            "resultado": "Não avaliado",
+            "problemas": [
+                "Nota inválida (não numérica): dez."
+            ]
+        },
+        {
+            "id": 6,
+            "nome": "Gabriela",
+            "media": null,
+            "resultado": "Não avaliado",
+            "problemas": [
+                "Campo 'notas' ausente ou inválido."
+            ]
+        },
+        {
+            "id": 7,
+            "nome": "",
+            "media": null,
+            "resultado": "Não avaliado",
+            "problemas": [
+                "Nome ausente ou vazio.",
+                "Campo 'ativo' deve ser True ou False."
+            ]
+        }
+    ]
+}

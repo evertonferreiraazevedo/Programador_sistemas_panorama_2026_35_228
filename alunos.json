@@ -1,0 +1,13 @@
+{
+"turma": "Python 2026",
+"alunos": [
+{"id": 1, "nome": "Ana", "notas": [8, 9, 10], "ativo": true},
+{"id": 2, "nome": "Bruno", "notas": [5, 6, 4], "ativo": true},
+{"id": 3, "nome": "Carla", "notas": [10, 9, 8], "ativo": false},
+{"id": 2, "nome": "Eva", "notas": [9, 9, 10], "ativo": true},
+{"id": 4, "nome": "Diego", "notas": [], "ativo": true},
+{"id": 5, "nome": "Felipe", "notas": [8, "dez", 7], "ativo": true},
+{"id": 6, "nome": "Gabriela", "nota": [7, 8, 9], "ativo": true},
+{"id": 7, "nome": "", "notas": [6, 7, 8], "ativo": "sim"}
+]
+}
