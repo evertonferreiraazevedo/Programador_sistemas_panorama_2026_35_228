@@ -2,6 +2,7 @@ import sqlite3
 conexao = sqlite3.connect('exemplo.db')
 cursor = conexao.cursor()
 
+
 def criar_banco():
     cursor.execute('''
                 CREATE TABLE IF NOT EXISTS Alunos (
@@ -23,14 +24,35 @@ def inserir_dados():
     conexao.commit()
 
 def consultar_dados():
-    pass
-
+    nome = input("Nome: ")
+    cursor.execute('''
+        select * from Alunos where nome LIKE ? ''', ("%"+nome+"%",))
+    resultados = cursor.fetchall()
+    for linha in resultados:
+        print(linha)
+   
 def deletar_dados():
-    pass
+    consultar_dados()
+    id_del = int(input("Id que deseja deletar:"))
+    if id_del < 0:
+        print("Valor invalido")
+    else:
+        cursor.execute('''
+            delete from Alunos where id = ?''', (id_del,))
+        conexao.commit()
+        print("Excluido com sucesso!")
+
+def atualizar_dados():
+    update = input("Quem voce deseja atualizar: ")
+    novo_nome = input("Novo nome: ")
+    cursor.execute('''
+        update aluno set nome = ?''', (novo_nome,))
+    conexao.commit()
+    print("Atualizado com sucesso")
 
 criar_banco()
 while True:
-    opcao = input("1 - Add, 2 - Consultar, 3 - Del")
+    opcao = input("1 - Add, 2 - Consultar, 3 - Del: ")
 
     if opcao == "1":
         inserir_dados()
