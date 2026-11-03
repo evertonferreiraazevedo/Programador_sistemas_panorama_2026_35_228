@@ -1,5 +1,32 @@
+import sqlite3
 import tkinter as tk
 from tkinter import messagebox
+
+# Declaração das variáveis globais para controle de escopo
+global entry_usuario, entry_senha, janela, frame_login, frame_interna
+
+def conectar_bd():
+    conexao = sqlite3.connect("sistema.db")
+    cursor = conexao.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS usuarios (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        usuario TEXT NOT NULL,
+                        senha TEXT NOT NULL''')
+    conexao.commit()
+    return conexao
+
+def consultar_bd():
+    pass
+
+def inserir_bd():
+    pass
+
+def atualizar_bd():
+    pass
+
+def deletar_bd():
+    pass
+
 
 def realizar_login():
     usuario = entry_usuario.get()
@@ -13,12 +40,15 @@ def realizar_login():
     else:
         messagebox.showerror("Erro", "Usuário ou senha incorretos.")
 
+def realizar_cadastro():
+    pass
+
 def abrir_tela_interna():
+    global frame_interna
     # Torna a janela um pouco maior para o painel principal
     janela.geometry("600x400")
     
     # 5. FRAME DA TELA INTERNA (Painel Principal)
-    global frame_interna
     frame_interna = tk.Frame(janela, bg="#ffffff")
     frame_interna.pack(fill="both", expand=True)
     
@@ -26,14 +56,12 @@ def abrir_tela_interna():
     frame_menu = tk.Frame(frame_interna, bg="#2c3e50", width=150)
     frame_menu.pack(side="left", fill="y")
     frame_menu.pack_propagate(False) # Mantém a largura fixa de 150px
-    
     tk.Label(frame_menu, text="MENU", font=("Arial", 12, "bold"), bg="#2c3e50", fg="#ffffff").pack(pady=20)
     tk.Button(frame_menu, text="Dashboard", bg="#34495e", fg="#ffffff", bd=0, activebackground="#1abc9c", cursor="hand2").pack(fill="x", ipady=10, pady=2)
     tk.Button(frame_menu, text="Perfil", bg="#34495e", fg="#ffffff", bd=0, activebackground="#1abc9c", cursor="hand2").pack(fill="x", ipady=10, pady=2)
-    
     # Botão de Logout para voltar à tela de login
     tk.Button(frame_menu, text="Sair", bg="#c0392b", fg="#ffffff", bd=0, cursor="hand2", command=realizar_logout).pack(side="bottom", fill="x", ipady=10)
-
+        
     # Área de conteúdo principal da tela interna
     frame_conteudo = tk.Frame(frame_interna, bg="#ecf0f1")
     frame_conteudo.pack(side="right", fill="both", expand=True)
@@ -49,41 +77,48 @@ def realizar_logout():
     entry_senha.delete(0, tk.END)
     frame_login.pack(padx=40, pady=50, fill="both", expand=True)
 
-# Janela Principal
-janela = tk.Tk()
-janela.title("Sistema com Frames")
-janela.geometry("400x500")
-janela.configure(bg="#f0f2f5")
-janela.resizable(False, False)
+def abrir_janela_principal():
+    global entry_usuario, entry_senha, janela, frame_login
+    
+    # Janela Principal
+    janela = tk.Tk()
+    janela.title("Sistema com Frames")
+    janela.geometry("400x500")
+    janela.configure(bg="#76cfff")
+    # janela.resizable(False, False)
+    
+    # 1. FRAME DE LOGIN (Container principal do login)
+    frame_login = tk.Frame(janela, bg="#9c3ff3", bd=1, relief="solid")
+    frame_login.pack(padx=40, pady=50, fill="both", expand=True)
+    
+    # Conteúdo do Login
+    lbl_titulo = tk.Label(frame_login, text="Seja Bem-vindo", font=("Arial", 18, "bold"), bg="#9c3ff3", fg="#ffffff")
+    lbl_titulo.pack(pady=(30, 20))
+    
+    # Campo Usuário
+    frame_usuario = tk.Frame(frame_login, bg="#9c3ff3")
+    frame_usuario.pack(fill="x", padx=25, pady=10)
+    lbl_usuario = tk.Label(frame_usuario, text="Usuário", font=("Arial", 12, "bold"), bg="#9c3ff3", fg="#ffffff")
+    lbl_usuario.pack(anchor="w", pady=(0, 5))
+    entry_usuario = tk.Entry(frame_usuario, font=("Arial", 11), bd=1, relief="solid")
+    entry_usuario.pack(fill="x", ipady=5)
+    
+    # Campo Senha
+    frame_senha = tk.Frame(frame_login, bg="#9c3ff3")
+    frame_senha.pack(fill="x", padx=25, pady=10)
+    lbl_senha = tk.Label(frame_senha, text="Senha", font=("Arial", 12, "bold"), bg="#9c3ff3", fg="#ffffff")
+    lbl_senha.pack(anchor="w", pady=(0, 5))
+    entry_senha = tk.Entry(frame_senha, font=("Arial", 11), show="*", bd=1, relief="solid")
+    entry_senha.pack(fill="x", ipady=5)
+    
+    # Botão Entrar
+    frame_acoes = tk.Frame(frame_login, bg="#9c3ff3")
+    frame_acoes.pack(fill="x", padx=25, pady=30)
+    btn_login = tk.Button(frame_acoes, text="Entrar", font=("Arial", 11, "bold"), bg="#1877f2", fg="#ffffff", bd=1, cursor="hand2", command=realizar_login)
+    btn_login.pack(fill="x", ipady=8)
+    btn_login = tk.Button(frame_acoes, text="Cadastrar", font=("Arial", 11, "bold"), bg="#1877f2", fg="#ffffff", bd=1, cursor="hand2", command=realizar_cadastro)
+    btn_login.pack(fill="x", ipady=8)
+    
+    janela.mainloop()
 
-# 1. FRAME DE LOGIN (Container principal do login)
-frame_login = tk.Frame(janela, bg="#9c3ff3", bd=1, relief="solid")
-frame_login.pack(padx=40, pady=50, fill="both", expand=True)
-
-# Conteúdo do Login
-lbl_titulo = tk.Label(frame_login, text="Seja Bem-vindo", font=("Arial", 16, "bold"), bg="#ffffff", fg="#333333")
-lbl_titulo.pack(pady=(30, 20))
-
-# Campo Usuário
-frame_usuario = tk.Frame(frame_login, bg="#ffffff")
-frame_usuario.pack(fill="x", padx=25, pady=10)
-lbl_usuario = tk.Label(frame_usuario, text="Usuário", font=("Arial", 10), bg="#ffffff", fg="#666666")
-lbl_usuario.pack(anchor="w", pady=(0, 5))
-entry_usuario = tk.Entry(frame_usuario, font=("Arial", 11), bd=1, relief="solid")
-entry_usuario.pack(fill="x", ipady=5)
-
-# Campo Senha
-frame_senha = tk.Frame(frame_login, bg="#ffffff")
-frame_senha.pack(fill="x", padx=25, pady=10)
-lbl_senha = tk.Label(frame_senha, text="Senha", font=("Arial", 10), bg="#ffffff", fg="#666666")
-lbl_senha.pack(anchor="w", pady=(0, 5))
-entry_senha = tk.Entry(frame_senha, font=("Arial", 11), show="*", bd=1, relief="solid")
-entry_senha.pack(fill="x", ipady=5)
-
-# Botão Entrar
-frame_acoes = tk.Frame(frame_login, bg="#ffffff")
-frame_acoes.pack(fill="x", padx=25, pady=30)
-btn_login = tk.Button(frame_acoes, text="Entrar", font=("Arial", 11, "bold"), bg="#1877f2", fg="#ffffff", bd=0, cursor="hand2", command=realizar_login)
-btn_login.pack(fill="x", ipady=8)
-
-janela.mainloop()
+abrir_janela_principal()
